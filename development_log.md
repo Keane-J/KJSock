@@ -29,7 +29,7 @@ PROBLEM
                 #define _WINSOCK2API_
                 #define _WINSOCKAPI_   /* Prevent inclusion of winsock.h in windows.h */ //为了避免后面包含winsock.h
         
-        如果先包含windows.h 在包含winsock.h 这样就会出现 windows.h包含了winsock.h 然后在包含winsock.h就出现了重定义
+        如果先包含windows.h 在包含winsock2.h 这样就会出现 windows.h包含了winsock.h 然后在包含winsock2.h就出现了重定义
     reslove-01:
         第一种.解决方案预处理 定义   WIN32_LEAN_AND_MEAN
         第二种 winsock2.h 定义在 windows.h前面

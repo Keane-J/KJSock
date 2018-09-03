@@ -21,5 +21,8 @@
     <ClCompile Include="..\tcp_server.h">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\tcp_server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

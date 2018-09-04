@@ -115,6 +115,9 @@
     <ClCompile Include="..\tcp_server.cpp" />
     <ClCompile Include="..\tcp_server.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\util.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

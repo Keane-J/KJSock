@@ -13,29 +13,50 @@
 	#include <unistd.h>
 #endif
 #include <vector>
+#include <mutex>
+
 #define CELL_SERVER_NUM  4
 #define INVAILD_SOCKET  ~0
-#define ERROR_SOCKET -1
 #define OK_SOCKET 0
 #define PORT 6677
 #define LISTEN_NUM 1024
-class Client {
 
-};
-class CellServer {
+namespace Keane {
+	class Client {
+		friend class CellServer;
+	public:
+		Client(int fd);
+	private:
+		int m_socket;
+	};
+	class CellServer {
+	public:
+		void addClient(Client *client);
+		void onRun();
+		void clientCount();
 
-};
-class TcpServer {
-public:
-	TcpServer();
-	void virtual onRun();
+	private:
+		void closeAll();
+		short recvData(int fd);
+		void closeClient(int fd);
 
+	private:
+		std::mutex m_mutex;
+		std::vector<Client *> m_buffClients;
+		std::vector<Client *> m_clients;
+	};
+	class TcpServer {
+	public:
+		TcpServer();
+		void virtual onRun();
 
-private:
-	short initSocket();
-private:
-	int m_socket;
-	std::vector<CellServer *> m_cells;
-};
-
+	private:
+		short initSocket();
+		void addClientToServer(Client *client);
+		void close();
+	private:
+		int m_socket;
+		std::vector<CellServer *> m_cells;
+	};
+}
 #endif

@@ -15,17 +15,18 @@
 #include <vector>
 #include <mutex>
 
-#define CELL_SERVER_NUM  4
+#define CELL_SERVER_NUM  2
 #define INVAILD_SOCKET  ~0
 #define OK_SOCKET 0
-#define PORT 6677
+#define PORT 6679
 #define LISTEN_NUM 1024
+#define IP "10.0.55.95"
 
 namespace Keane {
 	class Client {
 		friend class CellServer;
 	public:
-		Client(int fd);
+		Client(int fd) : m_socket(fd) { }
 	private:
 		int m_socket;
 	};
@@ -33,12 +34,12 @@ namespace Keane {
 	public:
 		void addClient(Client *client);
 		void onRun();
-		void clientCount();
+		int clientCount();
 
 	private:
 		void closeAll();
-		short recvData(int fd);
 		void closeClient(int fd);
+		short recvData(int fd);
 
 	private:
 		std::mutex m_mutex;
@@ -53,7 +54,7 @@ namespace Keane {
 	private:
 		short initSocket();
 		void addClientToServer(Client *client);
-		void close();
+
 	private:
 		int m_socket;
 		std::vector<CellServer *> m_cells;

@@ -50,7 +50,7 @@ std::ostream &Logger::log(LoggerType type, const char * file_name,
 #else
 	ctime_r(now, 30, &tt);
 #endif
-	os << s.c_str() << "---time:" << now << "  " << file_name <<"  "<<  function_name << ":" << line << "  ";
+	os << '\n' << s.c_str() << "---time:" << now << "  " << file_name <<"  "<<  function_name << ":" << line << "  ";
 	return  os;
 }
 

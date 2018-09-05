@@ -1,4 +1,6 @@
 #include "tcp_server.h"
+#include "kjlog.h"
+
 #include <algorithm>
 #include <iostream>
 #include <thread>
@@ -39,14 +41,14 @@ void CellServer::onRun() {
 		}
 		if (select(max_socket + 1, &fds, nullptr, nullptr, nullptr) == INVAILD_SOCKET) {
 			//std::cout << WSAGetLastError(); //»ñÈ¡´íÎóÂë
-			std::cerr << "run error";
+			KJLOG_ERROR << "run error";
 			closeAll();
 			return;
 		}
 		for (int fd = 0; fd < max_socket; ++fd) {
 			if (FD_ISSET(fd, &fds)) {
 				if (recvData(fd) == INVAILD_SOCKET) {
-					std::cerr << "can not recv";
+					KJLOG_ERROR << "can not recv";
 					FD_CLR(fd, &fds);
 					closeClient(fd);
 				}
@@ -108,13 +110,12 @@ void TcpServer::onRun() {
 		std::thread t(&CellServer::onRun, m_cells[i]);
 		t.detach();
 	}
-	std::cout << "start run";
 	while (1) {
 		if (select(m_socket + 1, &fds, nullptr, nullptr, nullptr) == INVAILD_SOCKET) {
 #ifdef _WIN32
-			std::cerr << "select error, thread id" << GetCurrentThreadId();
+			KJLOG_ERROR << "select error, thread id" << GetCurrentThreadId();
 #else
-			std::cerr << "select  error thread id" << pthread_self(); // or gettid()
+			KJLOG_ERROR << "select  error thread id" << pthread_self(); // or gettid()
 #endif
 			break;
 		}
@@ -149,11 +150,11 @@ short TcpServer::initSocket() {
 	wd = MAKEWORD(1, 1);
 	int ret = WSAStartup(wd, &ws_data);
 	if (ret != OK_SOCKET) {
-		std::cerr << "can not wsa start up";
+		KJLOG_ERROR << "can not wsa start up";
 	}
 #endif
 	if ((m_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVAILD_SOCKET) {
-		std::cerr << "can not socket";
+		KJLOG_ERROR << "can not socket";
 	}
 	sockaddr_in server_addr;
 	server_addr.sin_family = AF_INET;
@@ -166,18 +167,18 @@ short TcpServer::initSocket() {
 	if (::bind(m_socket, (sockaddr *)&server_addr, sizeof(server_addr)) == INVAILD_SOCKET) {
 		//std::cout << WSAGetLastError();
 		close(m_socket);
-		std::cerr << "bind error";
+		KJLOG_ERROR << "bind error";
 		return -1;
 	}
-	if (::listen(m_socket, LISTEN_NUM) == INVAILD_SOCKET) {
+	if (::listen(m_socket, LISTEN_NUM) != INVAILD_SOCKET) {
 		close(m_socket);
-		std::cerr << "listen error";
+		KJLOG_ERROR << "listen error";
 		return -1;
 	}
 #ifdef __linux_
 	ret = 0;
 	if (setsocketopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &ret, sizeof(ret)) == INVAILD_SOCKET) {
-		std::cerr << "can not set reused, function and  line" << _FUNCTION_ << _LINE_;
+		KJLOG_ERROR << "can not set reused, function and  line" << _FUNCTION_ << _LINE_;
 	}
 #endif
 	return OK_SOCKET;

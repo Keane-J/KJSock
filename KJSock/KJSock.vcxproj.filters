@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\log">
+      <UniqueIdentifier>{580bfb52-67a0-4217-bff2-9e5cacf5e316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\redis">
+      <UniqueIdentifier>{4e1a4bc5-6685-491f-9f50-35e30f25a920}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -24,10 +30,16 @@
     <ClCompile Include="..\tcp_server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\kjlog.cpp">
+      <Filter>源文件\log</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\util.hpp">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\kjlog.h">
+      <Filter>源文件\log</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

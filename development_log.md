@@ -35,4 +35,15 @@ PROBLEM
         第二种 winsock2.h 定义在 windows.h前面
 
     problem-02:
+        类里面可以定义友元外部函数 而且调用不需要指定域名， 因为会根据参数的域名去找函数
+        namespace tt {
+            class A {
+            public:
+                friend void play(A a) {
+
+                }
+            }
+        }
+        int main() { play(); }
         
+    problem-03

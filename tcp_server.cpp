@@ -170,7 +170,7 @@ short TcpServer::initSocket() {
 		KJLOG_ERROR << "bind error";
 		return -1;
 	}
-	if (::listen(m_socket, LISTEN_NUM) != INVAILD_SOCKET) {
+	if (::listen(m_socket, LISTEN_NUM) == INVAILD_SOCKET) {
 		close(m_socket);
 		KJLOG_ERROR << "listen error";
 		return -1;

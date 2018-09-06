@@ -1,21 +1,19 @@
 #include "kjlog.h"
 #include <time.h>
+namespace KeaneJ {
 Logger::Logger() : fp(LOG_FILE, std::ios::in | std::ios::out) {
 
 }
-
 Logger &Logger::get() {
 	static Logger log;
 	return log;
 }
-
 std::ostream& Logger::getStream() {
 	if (fp.is_open()) {
 		return fp;
 	}
 	return std::cout;
 }
-
 std::ostream &Logger::log(LoggerType type, const char * file_name, 
 						  const char * function_name, int line) {
 	std::ostream &os = getStream();
@@ -53,7 +51,7 @@ std::ostream &Logger::log(LoggerType type, const char * file_name,
 	os << '\n' << s.c_str() << "---time:" << now << "  " << file_name <<"  "<<  function_name << ":" << line << "  ";
 	return  os;
 }
-
 Logger::~Logger() {
 	fp.close();
+}
 }

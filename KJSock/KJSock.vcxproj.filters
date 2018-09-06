@@ -13,11 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\log">
-      <UniqueIdentifier>{580bfb52-67a0-4217-bff2-9e5cacf5e316}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\redis">
       <UniqueIdentifier>{4e1a4bc5-6685-491f-9f50-35e30f25a920}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\RWLock">
+      <UniqueIdentifier>{57eb85b9-62d8-4475-8ab2-d2181989d963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Logger">
+      <UniqueIdentifier>{580bfb52-67a0-4217-bff2-9e5cacf5e316}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +34,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\kjlog.cpp">
-      <Filter>源文件\log</Filter>
+      <Filter>源文件\Logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +42,10 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="..\kjlog.h">
-      <Filter>源文件\log</Filter>
+      <Filter>源文件\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rwlock.hpp">
+      <Filter>源文件\RWLock</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

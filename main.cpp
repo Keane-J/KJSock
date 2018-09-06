@@ -35,12 +35,11 @@ int main() {
 	for (int i = 0; i < THREAD_NUM; ++i) {
 		t[i].detach();
 	}
-	/**
 	using namespace Keane;
 	KJLOG_INFO << "START RUN";
 	TcpServer server;
 	std::thread t(&TcpServer::onRun, &server);
-	t.join();**/
+	t.join();
 	Sleep(200000);
 	return 0;
 }

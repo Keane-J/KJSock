@@ -1,4 +1,4 @@
 *.obj
-/.vs/KJSock/
+/*.vs/
 /Debug
 *.ipch
